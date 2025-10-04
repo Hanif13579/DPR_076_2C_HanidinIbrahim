@@ -15,7 +15,11 @@ class PenggajianController extends BaseController
     public function index()
     {
         $anggotaModel = new AnggotaModel();
-        $data['anggota'] = $anggotaModel->findAll();
+        $keyword = $this->request->getVar('keyword');
+
+        // Panggil method baru yang sudah menangani pencarian dan kalkulasi gaji
+        $data['anggota_gaji'] = $anggotaModel->getGajiAnggota($keyword);
+        $data['keyword'] = $keyword;
         
         return view('admin/penggajian/index', $data);
     }
