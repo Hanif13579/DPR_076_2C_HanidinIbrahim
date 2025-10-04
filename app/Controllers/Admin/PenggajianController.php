@@ -83,4 +83,26 @@ class PenggajianController extends BaseController
         return redirect()->to('/admin/penggajian');
     }
 
+    /**
+     * Menampilkan detail komponen gaji yang dimiliki seorang anggota.
+     */
+    public function detail($id_anggota)
+    {
+        $anggotaModel = new AnggotaModel();
+        $penggajianModel = new PenggajianModel();
+
+        // Ambil data anggota
+        $data['anggota'] = $anggotaModel->find($id_anggota);
+
+        // Ambil data komponen gaji yang dimiliki anggota ini
+        // dengan menggabungkan (JOIN) tabel penggajian dan komponen_gaji
+        $data['komponen_dimiliki'] = $penggajianModel
+            ->select('komponen_gaji.nama_komponen, komponen_gaji.kategori, komponen_gaji.nominal, komponen_gaji.satuan')
+            ->join('komponen_gaji', 'komponen_gaji.id_komponen_gaji = penggajian.id_komponen_gaji')
+            ->where('penggajian.id_anggota', $id_anggota)
+            ->findAll();
+
+        return view('admin/penggajian/detail', $data);
+    }
+
 }

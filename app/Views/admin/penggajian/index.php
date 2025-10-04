@@ -23,7 +23,10 @@
             <tr class="border-b">
                 <td class="py-3 px-4"><?= esc($row['nama_depan'] . ' ' . $row['nama_belakang']) ?></td>
                 <td class="py-3 px-4 text-center">
-                    <a href="<?= base_url('admin/penggajian/atur/' . $row['id_anggota']) ?>" class="bg-indigo-500 text-white py-1 px-3 rounded hover:bg-indigo-600">
+                    <a href="<?= base_url('admin/penggajian/detail/' . $row['id_anggota']) ?>" class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">
+                        Detail
+                    </a>
+                    <a href="<?= base_url('admin/penggajian/atur/' . $row['id_anggota']) ?>" class="bg-indigo-500 text-white py-1 px-3 rounded hover:bg-indigo-600 ml-2">
                         Atur Gaji
                     </a>
                     <a href="<?= base_url('admin/penggajian/delete/' . $row['id_anggota']) ?>" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 ml-2" onclick="return confirm('Anda yakin ingin mereset semua komponen gaji untuk anggota ini?');">
