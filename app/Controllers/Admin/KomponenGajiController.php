@@ -10,11 +10,23 @@ class KomponenGajiController extends BaseController
     public function index()
     {
         $komponenGajiModel = new KomponenGajiModel();
-        $data = [
-            'komponen_gaji' => $komponenGajiModel->findAll()
-        ];
+        $keyword = $this->request->getVar('keyword');
+
+        if ($keyword) {
+            // Jika ada keyword, panggil fungsi search() yang mengembalikan builder
+            $builder = $komponenGajiModel->search($keyword);
+            // Ambil hasilnya dari builder
+            $data['komponen_gaji'] = $builder->get()->getResultArray();
+        } else {
+            // Jika tidak ada keyword, ambil semua data
+            $data['komponen_gaji'] = $komponenGajiModel->findAll();
+        }
+        
+        $data['keyword'] = $keyword; // Kirim keyword ke view
+
         return view('admin/komponen_gaji/index', $data);
     }
+
 
     public function new()
     {
@@ -64,7 +76,6 @@ class KomponenGajiController extends BaseController
         session()->setFlashdata('success', 'Komponen gaji berhasil ditambahkan.');
         return redirect()->to('/admin/komponen-gaji');
     }
-    // ... (method index, new, create biarkan seperti sebelumnya)
 
     /**
      * Menampilkan form untuk mengedit data berdasarkan ID.

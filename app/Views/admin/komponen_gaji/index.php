@@ -11,9 +11,17 @@
             <span class="block sm:inline"><?= session()->getFlashdata('success') ?></span>
         </div>
     <?php endif; ?>
+
     <a href="<?= base_url('/admin/komponen-gaji/new') ?>" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
         + Tambah Komponen Baru
     </a>
+
+    <form action="" method="get" class="mb-4">
+        <div class="flex">
+            <input type="text" name="keyword" class="w-full border rounded-l px-3 py-2" placeholder="Cari komponen gaji..." value="<?= esc($keyword ?? '') ?>">
+            <button type="submit" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-r">Cari</button>
+        </div>
+    </form>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full bg-white">
@@ -36,9 +44,8 @@
                         <td class="py-3 px-4"><?= esc($kg['nama_komponen']); ?></td>
                         <td class="py-3 px-4"><?= esc($kg['kategori']); ?></td>
                         <td class="py-3 px-4"><?= esc($kg['jabatan']); ?></td>
-                        <td class="py-3 px-4"><?= esc($kg['nominal']); ?></td>
+                        <td class="py-3 px-4"><?= 'Rp ' . number_format($kg['nominal'], 0, ',', '.'); ?></td>
                         <td class="py-3 px-4"><?= esc($kg['satuan']); ?></td>
-                        </td>
                         <td class="py-3 px-4 text-center">
                             <a href="<?= base_url('/admin/komponen-gaji/edit/' . $kg['id_komponen_gaji']) ?>" class="text-blue-500 hover:text-blue-700 font-semibold">Edit</a>
                             <a href="<?= base_url('/admin/komponen-gaji/delete/' . $kg['id_komponen_gaji']) ?>" class="text-red-500 hover:text-red-700 font-semibold ml-4" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</a>
@@ -48,7 +55,7 @@
                 
                 <?php if (empty($komponen_gaji)) : ?>
                     <tr>
-                        <td colspan="4" class="text-center py-4">Belum ada data komponen gaji.</td>
+                        <td colspan="7" class="text-center py-4">Data tidak ditemukan.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
