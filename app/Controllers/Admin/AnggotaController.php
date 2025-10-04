@@ -18,83 +18,96 @@ class AnggotaController extends BaseController
         return view('admin/anggota', $data); // Kirim data ke view
     }
 
-    /**
-     * Method untuk menampilkan form tambah anggota baru (Create).
-     * PENTING: Method ini juga mengirimkan struktur array kosong
-     * agar tidak terjadi error "Undefined array key" di view form.
-     */
+    // Method untuk menampilkan form tambah anggota baru
     public function new()
     {
-        // Siapkan data default (kosong) untuk dikirim ke view
         $data['anggota'] = [
             'id_anggota'        => null,
             'nama_depan'        => '',
             'nama_belakang'     => '',
-            'gelar_depan'       => '',
-            'gelar_belakang'    => '',
-            'jabatan'   => '',
-            'status_pernikahan' => 'Belum Kawin' // Nilai default untuk dropdown
+            'gelar_depan'       => '', // Ditambahkan
+            'gelar_belakang'    => '', // Ditambahkan
+            'jabatan'           => '',
+            'status_pernikahan' => 'Belum Kawin'
         ];
-
-        $data['jabatan_options'] = ['Ketua', 'Wakil Ketua', 'Anggota'];
+        $data['jabatan_options'] = ['Ketua', 'Wakil Ketua', 'Anggota', 'Sekretaris', 'Bendahara'];
         
         return view('admin/anggota_new', $data);
     }
 
-    /**
-     * Method untuk memproses penyimpanan data anggota baru ke database (Create).
-     */
+    // Method untuk memproses penyimpanan data anggota baru
     public function create()
     {
+        $rules = [
+            'nama_depan' => 'required|alpha_space|max_length[100]',
+            'jabatan'    => 'required|max_length[50]'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
         $anggotaModel = new AnggotaModel();
-        
-        // Ambil data dari form input
         $data = [
             'nama_depan'        => $this->request->getPost('nama_depan'),
             'nama_belakang'     => $this->request->getPost('nama_belakang'),
+            'gelar_depan'       => $this->request->getPost('gelar_depan'), // Ditambahkan
+            'gelar_belakang'    => $this->request->getPost('gelar_belakang'), // Ditambahkan
             'jabatan'           => $this->request->getPost('jabatan'),
             'status_pernikahan' => $this->request->getPost('status_pernikahan'),
         ];
 
-        // Simpan data ke database
         $anggotaModel->insert($data);
 
         session()->setFlashdata('success', 'Data anggota berhasil ditambahkan.');
-        // Arahkan kembali ke halaman utama kelola anggota
-        return redirect()->to('/admin/anggota');
+        return redirect()->to('/admin/anggota/list');
     }
 
-    /**
-     * Method untuk menampilkan form edit data anggota (Update).
-     * Method ini mengambil data spesifik berdasarkan ID.
-     */
+    // Method untuk menampilkan form edit data anggota
     public function edit($id)
     {
         $anggotaModel = new AnggotaModel();
-        $data['anggota'] = $anggotaModel->find($id); // Cari data berdasarkan ID
-        $data['jabatan_options'] = ['Ketua', 'Wakil Ketua', 'Anggota'];
-        return view('admin/anggota_edit', $data); // Kirim data yang ditemukan ke view
+        $data['anggota'] = $anggotaModel->find($id);
+        $data['jabatan_options'] = ['Ketua', 'Wakil Ketua', 'Anggota', 'Sekretaris', 'Bendahara'];
+        
+        return view('admin/anggota_edit', $data);
     }
 
-    /**
-     * Method untuk memproses pembaruan data anggota di database (Update).
-     */
+    // Method untuk memproses pembaruan data anggota
     public function update($id)
     {
-        $anggotaModel = new AnggotaModel();
+        $rules = [
+            'nama_depan' => 'required|alpha_space|max_length[100]',
+            'jabatan'    => 'required|max_length[50]'
+        ];
 
-        // Ambil data dari form input
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $anggotaModel = new AnggotaModel();
         $data = [
             'nama_depan'        => $this->request->getPost('nama_depan'),
             'nama_belakang'     => $this->request->getPost('nama_belakang'),
+            'gelar_depan'       => $this->request->getPost('gelar_depan'), // Ditambahkan
+            'gelar_belakang'    => $this->request->getPost('gelar_belakang'), // Ditambahkan
             'jabatan'           => $this->request->getPost('jabatan'),
             'status_pernikahan' => $this->request->getPost('status_pernikahan'),
         ];
 
-        // Update data di database berdasarkan ID
         $anggotaModel->update($id, $data);
 
-        // Arahkan kembali ke halaman utama kelola anggota
+        session()->setFlashdata('success', 'Data anggota berhasil diubah.');
         return redirect()->to('/admin/anggota');
+    }
+
+    /**
+     * Method untuk menghapus data anggota dari database (Delete).
+     */
+    public function delete($id)
+    {
+        $anggotaModel = new AnggotaModel();
+        $anggotaModel->delete($id); // Hapus data berdasarkan ID
+        return redirect()->to('/admin/anggota'); // Arahkan kembali
     }
 }

@@ -31,4 +31,6 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->post('anggota/update/(:num)', 'Admin\AnggotaController::update/$1'); // Proses update data
     $routes->post('anggota/create', 'Admin\AnggotaController::create'); // Proses simpan data baru
     
+    //DELETE
+    $routes->get('anggota/delete/(:num)', 'Admin\AnggotaController::delete/$1'); // Proses hapus data
 });
