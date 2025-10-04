@@ -9,7 +9,7 @@
 <body class="bg-gray-100 flex items-center justify-center h-screen">
 
     <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Login ke Akun Anda</h2>
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Aplikasi Perhitungan dan Transparansi Gaji DPR Berbasis WEB</h2>
         
         <?php if(session()->getFlashdata('error')): ?>
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">

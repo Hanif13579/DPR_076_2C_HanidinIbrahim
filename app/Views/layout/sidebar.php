@@ -1,6 +1,6 @@
 <aside class="w-64 bg-gray-800 text-white p-4">
     <div class="mb-8">
-        <h2 class="text-2xl font-bold">Admin Panel</h2>
+        <h2 class="text-2xl font-bold">Selamat Datang Atmin</h2>
     </div>
     <nav>
         <ul>

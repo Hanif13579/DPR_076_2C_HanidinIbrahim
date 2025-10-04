@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail Gaji: <?= esc($anggota['nama_depan']) ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-8">
+<?= $this->extend('layout/public_template') ?>
 
-<div class="container mx-auto max-w-4xl">
+<?php $this->section('title') ?>Detail Gaji: <?= esc($anggota['nama_depan']) ?><?php $this->endSection() ?>
+
+<?= $this->section('content') ?>
+
     <h1 class="text-3xl font-bold mb-1 text-center">
         Detail Gaji: <?= esc($anggota['nama_depan'] . ' ' . $anggota['nama_belakang']) ?>
     </h1>
@@ -24,9 +20,7 @@
             </thead>
             <tbody class="text-gray-700">
                 <?php if (empty($komponen_dimiliki)) : ?>
-                    <tr>
-                        <td colspan="3" class="text-center py-4">Anggota ini belum memiliki komponen gaji.</td>
-                    </tr>
+                    <tr><td colspan="3" class="text-center py-4">Anggota ini belum memiliki komponen gaji.</td></tr>
                 <?php else : ?>
                     <?php $total = 0; ?>
                     <?php foreach ($komponen_dimiliki as $komponen) : ?>
@@ -44,9 +38,7 @@
                     <?php endforeach; ?>
                     <tr class="bg-gray-100 font-bold">
                         <td colspan="2" class="py-3 px-4 text-right">TOTAL GAJI KOTOR</td>
-                        <td class="py-3 px-4 text-right">
-                            <?= 'Rp ' . number_format($total, 0, ',', '.'); ?>
-                        </td>
+                        <td class="py-3 px-4 text-right"><?= 'Rp ' . number_format($total, 0, ',', '.'); ?></td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -58,7 +50,5 @@
             &larr; Kembali ke Daftar Anggota
         </a>
     </div>
-</div>
 
-</body>
-</html>
+<?= $this->endSection() ?>

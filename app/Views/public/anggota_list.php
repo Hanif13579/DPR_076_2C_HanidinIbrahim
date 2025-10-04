@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Daftar Anggota</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-8">
+<?= $this->extend('layout/public_template') ?>
 
-<div class="container mx-auto">
+<?php $this->section('title') ?>Daftar Anggota<?php $this->endSection() ?>
+
+<?= $this->section('content') ?>
+
     <h1 class="text-3xl font-bold mb-6 text-center">Daftar Anggota</h1>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -39,7 +35,5 @@
             </tbody>
         </table>
     </div>
-</div>
 
-</body>
-</html>
+<?= $this->endSection() ?>
