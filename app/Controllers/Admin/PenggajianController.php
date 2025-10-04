@@ -19,4 +19,51 @@ class PenggajianController extends BaseController
         
         return view('admin/penggajian/index', $data);
     }
+
+    /**
+     * Menampilkan halaman untuk mengatur komponen gaji seorang anggota.
+     */
+    public function atur($id_anggota)
+    {
+        $anggotaModel = new AnggotaModel();
+        $komponenGajiModel = new KomponenGajiModel();
+        $penggajianModel = new PenggajianModel();
+
+        $data = [
+            'anggota'           => $anggotaModel->find($id_anggota),
+            'semua_komponen'    => $komponenGajiModel->findAll(),
+            'komponen_terpilih' => $penggajianModel->getKomponenByAnggota($id_anggota) ?? []
+        ];
+
+        return view('admin/penggajian/atur', $data);
+    }
+
+    /**
+     * Menyimpan pengaturan komponen gaji untuk seorang anggota.
+     */
+    public function save($id_anggota)
+    {
+        $penggajianModel = new PenggajianModel();
+        
+        // 1. Ambil ID komponen yang dicentang dari form
+        $komponenIds = $this->request->getPost('komponen_ids') ?? [];
+
+        // 2. Hapus semua pengaturan lama untuk anggota ini
+        $penggajianModel->where('id_anggota', $id_anggota)->delete();
+
+        // 3. Masukkan pengaturan baru jika ada yang dicentang
+        if (!empty($komponenIds)) {
+            $dataToInsert = [];
+            foreach ($komponenIds as $komponenId) {
+                $dataToInsert[] = [
+                    'id_anggota' => $id_anggota,
+                    'id_komponen_gaji' => $komponenId
+                ];
+            }
+            $penggajianModel->insertBatch($dataToInsert);
+        }
+
+        session()->setFlashdata('success', 'Pengaturan gaji untuk anggota berhasil diperbarui.');
+        return redirect()->to('/admin/penggajian');
+    }
 }

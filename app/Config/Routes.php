@@ -51,5 +51,7 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
 
     // RUTE BARU UNTUK PENGGAJIAN
     $routes->get('penggajian', 'Admin\PenggajianController::index');
+    $routes->get('penggajian/atur/(:num)', 'Admin\PenggajianController::atur/$1');
+    $routes->post('penggajian/save/(:num)', 'Admin\PenggajianController::save/$1');
 
 });
