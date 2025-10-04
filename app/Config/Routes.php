@@ -20,7 +20,9 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('dashboard', 'Admin\DashboardController::index');
 
      // Rute untuk Anggota
-    $routes->get('anggota', 'Admin\AnggotaController::new');        // Form tambah data
-    $routes->post('anggota/update/(:num)', 'Admin\AnggotaController::update/$1'); // Proses update data
+    //CREATE
+    $routes->get('anggota/new', 'Admin\AnggotaController::new');        // Form tambah data
 
+    //READ
+    $routes->get('anggota', 'Admin\AnggotaController::index');          // Menampilkan tabel (sudah ada)
 });

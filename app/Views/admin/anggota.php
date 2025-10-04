@@ -17,7 +17,6 @@
                     <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Nama Lengkap</th>
                     <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Jabatan</th>
                     <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Status Pernikahan</th>
-                    <th class="py-3 px-4 uppercase font-semibold text-sm text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700">
@@ -35,11 +34,6 @@
                         <td class="py-3 px-4"><?= esc($row['jabatan']); ?></td>
                         <td class="py-3 px-4"><?= esc($row['status_pernikahan']); ?></td>
                         <td class="py-3 px-4 text-center">
-                            <a href="<?= base_url('/admin/anggota/edit/' . $row['id_anggota']) ?>" class="text-blue-500 hover:text-blue-700 font-semibold">Edit</a>
-                            
-                            <a href="<?= base_url('/admin/anggota/delete/' . $row['id_anggota']) ?>" class="text-red-500 hover:text-red-700 font-semibold ml-4" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                Hapus
-                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -8,6 +8,17 @@ use App\Models\AnggotaModel; // Pastikan model sudah dipanggil
 class AnggotaController extends BaseController
 {
     /**
+     * Method untuk menampilkan halaman utama Kelola Anggota (Read).
+     * Method ini mengambil semua data anggota dan menampilkannya dalam sebuah tabel.
+     */
+    public function index()
+    {
+        $anggotaModel = new AnggotaModel();
+        $data['anggota'] = $anggotaModel->findAll(); // Ambil semua data
+        return view('admin/anggota', $data); // Kirim data ke view
+    }
+
+    /**
      * Method untuk menampilkan form tambah anggota baru (Create).
      * PENTING: Method ini juga mengirimkan struktur array kosong
      * agar tidak terjadi error "Undefined array key" di view form.
