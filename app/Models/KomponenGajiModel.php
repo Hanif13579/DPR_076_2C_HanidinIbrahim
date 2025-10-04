@@ -11,5 +11,5 @@ class KomponenGajiModel extends Model
     protected $returnType       = 'array';
 
     // Sesuaikan dengan kolom di tabel komponen_gaji kamu
-    protected $allowedFields    = ['nama_komponen', 'jenis_komponen', 'jumlah'];
+    protected $allowedFields    = ['nama_komponen', 'kategori', 'jabatan', 'nominal', 'satuan'];
 }

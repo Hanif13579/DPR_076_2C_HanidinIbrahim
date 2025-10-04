@@ -26,6 +26,13 @@ class KomponenGajiController extends BaseController
      */
     public function new()
     {
+        // Siapkan array kosong agar tidak error di view
+        $data['komponen_gaji'] = [
+            'id_komponen_gaji' => null,
+            'nama_komponen'    => '',
+            'kategori'   => 'Tunjangan', // Beri nilai default
+        ];
+
         return view('admin/komponen_gaji/new');
     }
 
@@ -37,7 +44,7 @@ class KomponenGajiController extends BaseController
         // 1. Aturan validasi
         $rules = [
             'nama_komponen'  => 'required|max_length[100]',
-            'jenis_komponen' => 'required|in_list[Tunjangan,Potongan]'
+            'kategori' => 'required|in_list[Tunjangan,Potongan]'
         ];
 
         // 2. Lakukan validasi
@@ -50,7 +57,7 @@ class KomponenGajiController extends BaseController
         $komponenGajiModel = new KomponenGajiModel();
         $komponenGajiModel->insert([
             'nama_komponen'  => $this->request->getPost('nama_komponen'),
-            'jenis_komponen' => $this->request->getPost('jenis_komponen'),
+            'kategori' => $this->request->getPost('kategori'),
         ]);
 
         // 4. Set pesan sukses dan redirect

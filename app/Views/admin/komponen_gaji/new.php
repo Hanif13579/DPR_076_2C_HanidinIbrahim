@@ -9,20 +9,20 @@
 
             <div class="mb-4">
                 <label for="nama_komponen" class="block text-gray-700">Nama Komponen (Wajib)</label>
-                <input type="text" name="nama_komponen" id="nama_komponen" value="<?= old('nama_komponen') ?>" class="w-full border rounded px-3 py-2">
+                <input type="text" name="nama_komponen" id="nama_komponen" value="<?= old('nama_komponen', $komponen_gaji['nama_komponen']) ?>" class="w-full border rounded px-3 py-2">
                 <?php if (session('errors.nama_komponen')) : ?>
                     <p class="text-red-500 text-sm mt-1"><?= session('errors.nama_komponen') ?></p>
                 <?php endif; ?>
             </div>
 
             <div class="mb-4">
-                <label for="jenis_komponen" class="block text-gray-700">Jenis Komponen (Wajib)</label>
-                <select name="jenis_komponen" id="jenis_komponen" class="w-full border rounded px-3 py-2">
-                    <option value="Tunjangan" <?= (old('jenis_komponen') == 'Tunjangan') ? 'selected' : '' ?>>Tunjangan</option>
-                    <option value="Potongan" <?= (old('jenis_komponen') == 'Potongan') ? 'selected' : '' ?>>Potongan</option>
+                <label for="kategori" class="block text-gray-700">Jenis Komponen (Wajib)</label>
+                <select name="kategori" id="kategori" class="w-full border rounded px-3 py-2">
+                    <option value="Tunjangan" <?= (old('kategori', $komponen_gaji['kategori']) == 'Tunjangan') ? 'selected' : '' ?>>Tunjangan</option>
+                    <option value="Potongan" <?= (old('kategori', $komponen_gaji['kategori']) == 'Potongan') ? 'selected' : '' ?>>Potongan</option>
                 </select>
-                 <?php if (session('errors.jenis_komponen')) : ?>
-                    <p class="text-red-500 text-sm mt-1"><?= session('errors.jenis_komponen') ?></p>
+                 <?php if (session('errors.kategori')) : ?>
+                    <p class="text-red-500 text-sm mt-1"><?= session('errors.kategori') ?></p>
                 <?php endif; ?>
             </div>
             
