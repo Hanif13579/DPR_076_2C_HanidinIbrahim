@@ -26,6 +26,9 @@
                     <a href="<?= base_url('admin/penggajian/atur/' . $row['id_anggota']) ?>" class="bg-indigo-500 text-white py-1 px-3 rounded hover:bg-indigo-600">
                         Atur Gaji
                     </a>
+                    <a href="<?= base_url('admin/penggajian/delete/' . $row['id_anggota']) ?>" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 ml-2" onclick="return confirm('Anda yakin ingin mereset semua komponen gaji untuk anggota ini?');">
+                        Reset
+                    </a>
                 </td>
             </tr>
             <?php endforeach; ?>

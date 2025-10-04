@@ -54,4 +54,6 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->get('penggajian/atur/(:num)', 'Admin\PenggajianController::atur/$1');
     $routes->post('penggajian/save/(:num)', 'Admin\PenggajianController::save/$1');
 
+    $routes->get('penggajian/delete/(:num)', 'Admin\PenggajianController::delete/$1'); // Proses hapus/reset
+
 });

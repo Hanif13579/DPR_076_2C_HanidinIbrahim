@@ -66,4 +66,21 @@ class PenggajianController extends BaseController
         session()->setFlashdata('success', 'Pengaturan gaji untuk anggota berhasil diperbarui.');
         return redirect()->to('/admin/penggajian');
     }
+
+    // ... (method index, atur, save biarkan seperti sebelumnya)
+
+    /**
+     * Menghapus (mereset) semua komponen gaji untuk seorang anggota.
+     */
+    public function delete($id_anggota)
+    {
+        $penggajianModel = new PenggajianModel();
+        
+        // Hapus semua data di tabel penggajian berdasarkan id_anggota
+        $penggajianModel->where('id_anggota', $id_anggota)->delete();
+
+        session()->setFlashdata('success', 'Pengaturan gaji untuk anggota berhasil direset.');
+        return redirect()->to('/admin/penggajian');
+    }
+
 }
