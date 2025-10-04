@@ -11,8 +11,11 @@ $routes->get('/login', 'AuthController::index');
 $routes->post('/login/process', 'AuthController::loginProcess');
 $routes->get('/logout', 'AuthController::logout');
 
-// Rute untuk pengguna biasa
-$routes->get('/dashboard', 'DashboardController::index', ['filter' => 'auth']);
+// RUTE UNTUK USER YANG SUDAH LOGIN (TAPI BUKAN ADMIN)
+$routes->group('', ['filter' => 'login'], static function ($routes) {
+    $routes->get('/anggota', 'Anggota::index');
+    $routes->get('/anggota/detail/(:num)', 'Anggota::detail/$1');
+});
 
 // RUTE KHUSUS UNTUK ADMIN
 // Dibungkus dalam grup agar lebih rapi

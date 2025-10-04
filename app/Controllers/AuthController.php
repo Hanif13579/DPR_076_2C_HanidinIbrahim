@@ -37,7 +37,7 @@ class AuthController extends BaseController
             if (strtolower($user['role']) == 'admin') {
                 return redirect()->to('/admin/dashboard');
             } else {
-                return redirect()->to('/dashboard');
+                return redirect()->to('/anggota');
             }
         } else {
             // Jika gagal, kembali ke login dengan pesan error
