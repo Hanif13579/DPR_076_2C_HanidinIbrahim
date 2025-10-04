@@ -5,7 +5,13 @@
 <div class="container mx-auto">
     <h1 class="text-2xl font-bold mb-4">Kelola Komponen Gaji</h1>
 
-    <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+    <?php if (session()->getFlashdata('success')) : ?>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Sukses!</strong>
+            <span class="block sm:inline"><?= session()->getFlashdata('success') ?></span>
+        </div>
+    <?php endif; ?>
+    <a href="<?= base_url('/admin/komponen-gaji/new') ?>" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
         + Tambah Komponen Baru
     </a>
 
@@ -19,6 +25,7 @@
                     <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Jabatan</th>
                     <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Nominal</th>
                     <th class="py-3 px-4 uppercase font-semibold text-sm text-left">Satuan</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700">
@@ -31,8 +38,10 @@
                         <td class="py-3 px-4"><?= esc($kg['jabatan']); ?></td>
                         <td class="py-3 px-4"><?= esc($kg['nominal']); ?></td>
                         <td class="py-3 px-4"><?= esc($kg['satuan']); ?></td>
-
+                        </td>
                         <td class="py-3 px-4 text-center">
+                            <a href="<?= base_url('/admin/komponen-gaji/edit/' . $kg['id_komponen_gaji']) ?>" class="text-blue-500 hover:text-blue-700 font-semibold">Edit</a>
+                            <a href="#" class="text-red-500 hover:text-red-700 font-semibold ml-4">Hapus</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

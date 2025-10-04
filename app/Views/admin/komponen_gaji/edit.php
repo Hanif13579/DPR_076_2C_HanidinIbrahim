@@ -1,10 +1,10 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-    <h1 class="text-2xl font-bold mb-4">Tambah Komponen Gaji Baru</h1>
+    <h1 class="text-2xl font-bold mb-4">Edit Komponen Gaji</h1>
     
     <div class="bg-white p-6 rounded shadow-md">
-        <form action="<?= base_url('/admin/komponen-gaji/create') ?>" method="post">
+        <form action="<?= base_url('/admin/komponen-gaji/update/' . $komponen_gaji['id_komponen_gaji']) ?>" method="post">
             <?= csrf_field() ?>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -33,7 +33,7 @@
 
                     <div class="mb-4">
                         <label for="nominal" class="block text-gray-700 font-semibold mb-2">Nominal (Wajib)</label>
-                        <input type="number" name="nominal" id="nominal" value="<?= old('nominal', $komponen_gaji['nominal']) ?>" class="w-full border rounded px-3 py-2" placeholder="Contoh: 500000">
+                        <input type="number" name="nominal" id="nominal" value="<?= old('nominal', $komponen_gaji['nominal']) ?>" class="w-full border rounded px-3 py-2">
                         <?php if (session('errors.nominal')) : ?>
                             <p class="text-red-500 text-sm mt-1"><?= session('errors.nominal') ?></p>
                         <?php endif; ?>
@@ -72,7 +72,7 @@
             </div>
             
             <div class="mt-6 border-t pt-4">
-                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Simpan Komponen</button>
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Update Komponen</button>
                 <a href="<?= base_url('/admin/komponen-gaji') ?>" class="ml-4 text-gray-600">Batal</a>
             </div>
         </form>
