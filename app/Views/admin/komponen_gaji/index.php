@@ -41,7 +41,7 @@
                         </td>
                         <td class="py-3 px-4 text-center">
                             <a href="<?= base_url('/admin/komponen-gaji/edit/' . $kg['id_komponen_gaji']) ?>" class="text-blue-500 hover:text-blue-700 font-semibold">Edit</a>
-                            <a href="#" class="text-red-500 hover:text-red-700 font-semibold ml-4">Hapus</a>
+                            <a href="<?= base_url('/admin/komponen-gaji/delete/' . $kg['id_komponen_gaji']) ?>" class="text-red-500 hover:text-red-700 font-semibold ml-4" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

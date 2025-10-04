@@ -116,4 +116,15 @@ class KomponenGajiController extends BaseController
         session()->setFlashdata('success', 'Komponen gaji berhasil diubah.');
         return redirect()->to('/admin/komponen-gaji');
     }
+    public function delete($id)
+    {
+        $komponenGajiModel = new KomponenGajiModel();
+        
+        // Hapus data berdasarkan ID
+        $komponenGajiModel->delete($id);
+
+        // Set pesan sukses dan redirect
+        session()->setFlashdata('success', 'Komponen gaji berhasil dihapus.');
+        return redirect()->to('/admin/komponen-gaji');
+    }
 }

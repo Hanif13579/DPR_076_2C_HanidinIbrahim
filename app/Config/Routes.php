@@ -47,7 +47,7 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     $routes->post('komponen-gaji/update/(:num)', 'Admin\KomponenGajiController::update/$1'); // Proses update
 
     //DELETE
-    
+    $routes->get('komponen-gaji/delete/(:num)', 'Admin\KomponenGajiController::delete/$1'); // Proses hapus
 
 
 });
