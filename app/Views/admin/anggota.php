@@ -16,6 +16,13 @@
         + Tambah Anggota Baru
     </a>
 
+    <form action="" method="get" class="mb-4">
+        <div class="flex">
+            <input type="text" name="keyword" class="w-full border rounded-l px-3 py-2" placeholder="Cari anggota..." value="<?= esc($keyword) ?>">
+            <button type="submit" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-r">Cari</button>
+        </div>
+    </form>
+
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full bg-white">
             <thead class="bg-gray-800 text-white">

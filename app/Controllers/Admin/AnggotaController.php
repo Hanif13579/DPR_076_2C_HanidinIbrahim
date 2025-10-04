@@ -13,10 +13,25 @@ class AnggotaController extends BaseController
      */
     public function index()
     {
-        $anggotaModel = new AnggotaModel();
-        $data['anggota'] = $anggotaModel->findAll(); // Ambil semua data
-        return view('admin/anggota', $data); // Kirim data ke view
+        $anggotaModel = new \App\Models\AnggotaModel();
+        $keyword = $this->request->getVar('keyword');
+
+        // Jika ada keyword pencarian
+        if ($keyword) {
+            // search() akan mengembalikan objek Builder
+            $builder = $anggotaModel->search($keyword);
+            // Ambil semua data dari builder menggunakan get()->getResultArray()
+            $data['anggota'] = $builder->get()->getResultArray();
+        } else {
+            // Jika tidak ada keyword, panggil findAll() dari Model
+            $data['anggota'] = $anggotaModel->findAll();
+        }
+
+        $data['keyword'] = $keyword;
+
+        return view('admin/anggota', $data);
     }
+
 
     // Method untuk menampilkan form tambah anggota baru
     public function new()
