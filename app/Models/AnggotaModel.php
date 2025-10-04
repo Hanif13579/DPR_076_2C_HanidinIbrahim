@@ -16,7 +16,7 @@ class AnggotaModel extends Model
         'nama_belakang', 
         'gelar_depan', 
         'gelar_belakang', 
-        'jabatan_anggota', 
+        'jabatan', 
         'status_pernikahan'
     ];
 }

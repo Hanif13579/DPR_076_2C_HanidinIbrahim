@@ -22,7 +22,13 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
      // Rute untuk Anggota
     //CREATE
     $routes->get('anggota/new', 'Admin\AnggotaController::new');        // Form tambah data
-
+    
     //READ
     $routes->get('anggota', 'Admin\AnggotaController::index');          // Menampilkan tabel (sudah ada)
+
+    //UPDATE
+    $routes->get('anggota/edit/(:num)', 'Admin\AnggotaController::edit/$1'); // Form edit data
+    $routes->post('anggota/update/(:num)', 'Admin\AnggotaController::update/$1'); // Proses update data
+    $routes->post('anggota/create', 'Admin\AnggotaController::create'); // Proses simpan data baru
+    
 });

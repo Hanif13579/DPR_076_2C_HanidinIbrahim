@@ -7,8 +7,18 @@
     <input type="text" name="nama_belakang" id="nama_belakang" value="<?= old('nama_belakang', $anggota['nama_belakang'] ?? '') ?>" class="w-full border rounded px-3 py-2">
 </div>
 <div class="mb-4">
-    <label for="jabatan_anggota" class="block text-gray-700">Jabatan</label>
-    <input type="text" name="jabatan_anggota" id="jabatan_anggota" value="<?= old('jabatan_anggota', $anggota['jabatan_anggota'] ?? '') ?>" class="w-full border rounded px-3 py-2">
+    <label for="jabatan" class="block text-gray-700">Jabatan</label>
+    <select name="jabatan" id="jabatan" class="w-full border rounded px-3 py-2">
+        <?php foreach ($jabatan_options as $jabatan) : ?>
+            <option value="<?= $jabatan ?>" <?= (old('jabatan', $anggota['jabatan'] ?? '') == $jabatan) ? 'selected' : '' ?>>
+                <?= $jabatan ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    
+    <?php if (session('errors.jabatan')) : ?>
+        <p class="text-red-500 text-sm mt-1"><?= session('errors.jabatan') ?></p>
+    <?php endif; ?>
 </div>
 <div class="mb-4">
     <label for="status_pernikahan" class="block text-gray-700">Status Pernikahan</label>
