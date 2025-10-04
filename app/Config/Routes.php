@@ -49,5 +49,7 @@ $routes->group('admin', ['filter' => 'auth'], static function ($routes) {
     //DELETE
     $routes->get('komponen-gaji/delete/(:num)', 'Admin\KomponenGajiController::delete/$1'); // Proses hapus
 
+    // RUTE BARU UNTUK PENGGAJIAN
+    $routes->get('penggajian', 'Admin\PenggajianController::index');
 
 });

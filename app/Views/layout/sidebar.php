@@ -20,6 +20,11 @@
                 </a>
             </li>
             <li class="mb-4">
+                <a href="<?= base_url('/admin/penggajian') ?>" class="block hover:bg-gray-700 p-2 rounded">
+                    Pengaturan Gaji
+                </a>
+            </li>
+            <li class="mb-4">
                 <a href="<?= base_url('/logout') ?>" class="block hover:bg-red-700 p-2 rounded">
                     Logout
                 </a>
